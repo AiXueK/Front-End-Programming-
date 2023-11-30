@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Slackr</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- You can add your styles and scripts here -->
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/provided.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script type="module" src="src/helpers.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <!-- This is an example app structure, you can modify this as much as you choose -->
+  <header class="banner">
+    <h1>Slackr</h1>
+    <button id="sidebar-btn" class="user btn btn-outline-info">Nav</button>
+    <button type="button" id="profile-button" class="user btn btn-outline-primary">My Profile</button>
+    <!-- <button id="notification-test" class="user">notification</button> -->
+    <button type="button" id="logout-button" class="btn btn-outline-primary">Sign Out</button>
+  </header>
+  <main role="main">
+    <!-- templates -->
+    <!-- notification modal -->
+    <div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <button id="notification-close" type="button" class="btn-close close" aria-label="Close"></button>
+      </div>
+      <div id="notification-text" class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
+    </div>
+    <!-- image enlarged slide -->
+    <div class="image-slide mySlides">
+      <img src="" class="image-slide-image">
+    </div>
+    <!-- image enlarged slide modal -->
+    <div id="image-modal" class="modal" tabindex="-1">
+      <div class="image-modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Enlarged Image</h5>
+          </div>
+          <a id="slide-prev" class="prev">&#10094;</a>
+          <a id="slide-next" class="next">&#10095;</a>
+          <div id="image-slide-content" class="slideshow-container">
+            <!-- Next and previous buttons -->
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button id="image-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- invite form template -->
+    <div class="template invite-form">
+      <input class="form-check-input" type="checkbox" value="">
+      <label class="form-check-label" for="flexCheckDefault">
+        Default checkbox
+      </label>
+    </div>
+    <!-- pinned message modal -->
+    <div id="pinned-msg-modal" class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Pinned Messages</h5>
+          </div>
+          <div id="pinned-msg-modal-body" class="modal-body">
+            <!-- <p>Modal body text goes here.</p> -->
+          </div>
+          <div class="modal-footer">
+            <button id="pinned-msg-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- profile modal -->
+    <div id="profile-modal" class="modal" tabindex="-1">
+      <div class="user-profile-modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">User Profile</h5>
+          </div>
+          <div id="profile-modal-body" class="modal-body">
+            <div class="profile-info">
+              User Name: <input id="profile-name">
+              User Bio: <input id="profile-bio">
+              Edit new profile image source: <textarea name="" id="edit-profile-image" cols="30" rows="10"></textarea>
+              User Email: <input id="profile-email">
+              Change Password <input id="check-change-password" type="checkbox">
+              New Password: <input id="profile-password" type="password">
+              <input id="show-profile-password" type="checkbox">Show Password
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="profile-submit-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
+            <button id="profile-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- other users' profile modal -->
+    <div id="user-profile-modal" class="modal" tabindex="-1">
+      <div class="user-profile-modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">User Profile</h5>
+          </div>
+          <div id="user-profile-modal-body" class="modal-body">
+            <img src="" alt="" id="user-profile-image" class="user-profile-image rounded float-start">
+            <div class="user-profile-info">
+              <p id="user-profile-name">user name</p>
+              <p id="user-profile-bio">user bio</p>
+              <p id="user-profile-email">user email</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="user-profile-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- invite user modal -->
+    <div id="invite-usr-modal" class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Invite Users</h5>
+          </div>
+          <div id="invite-usr-modal-body" class="modal-body">
+            <!-- <p>Modal body text goes here.</p> -->
+          </div>
+          <div class="modal-footer">
+            <button id="invite-usr-submit-btn" type="button" class="btn btn-primary">Invite</button>
+            <button id="invite-usr-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- each message template -->
+    <div class="message template">
+      <img src="" alt="" class="message-sender-image rounded float-start">
+      <div class="message-body">
+        <div class="message-info">
+          <a href="#" class="message-user-name link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"></a>
+          <p class="message-time"></p>
+        </div>
+        <p class="message-content"></p>
+        <a href="#" class="image-enlarge"><img class="message-image thumbnail" src="" alt=""></a>
+        <div class="message-all-btn">
+          <div class="message-btns">
+            <button class="message-edit-btn btn btn-outline-primary">Edit</button>
+            <button class="message-delete-btn btn btn-outline-danger">Delete</button>
+          </div>
+          <div class="common-btn">
+            <div class="reaction-btn">
+              <button class="reaction-ok">&#9989</button>
+              <button class="reaction-suprise">&#10071</button>
+              <button class="reaction-question">&#10068</button>
+            </div>
+            <button class="pin-btn btn btn-outline-primary">Pin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Alert Popup -->
+    <div id="alert" class="alert alert-warning alert-dismissible hide" role="alert">
+      <strong>Error!</strong> <p id="alert-text">You should check in on some of those fields below.</p>
+      <button id="close-alert" type="button" aria-label="Close">X</button>
+      <button id="join-btn" type="button" class="btn btn-success">Join</button>
+    </div>
+    <!-- app goes here -->
+    <!-- register page -->
+    <div id="page-register" class="page-block">
+      <form>
+			  <div class="row mb-3">
+			    <label for="register-email" class="col-sm-2 col-form-label register-input">Email</label>
+			    <div class="col-sm-10">
+			      <input type="email" class="register-input form-control" id="register-email">
+			    </div>
+			  </div>
+			  <div class="row mb-3">
+			    <label for="register-name" class="col-sm-2 col-form-label">Name</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="register-input form-control" id="register-name">
+			    </div>
+			  </div>
+			  <div class="row mb-3">
+			    <label for="register-password" class="col-sm-2 col-form-label">Password</label>
+			    <div class="col-sm-10">
+			      <input type="password" class="register-input form-control" id="register-password">
+			    </div>
+			  </div>
+			  <div class="row mb-3">
+			    <label for="register-password-confirm" class="col-sm-2 col-form-label">Confirm Password</label>
+			    <div class="col-sm-10">
+			      <input type="password" class="register-input form-control" id="register-password-confirm">
+			    </div>
+			  </div>
+			  <button type="submit" id="register-submit" class="btn btn-primary">Register</button>
+        <a id="jump-login" class="btn btn-primary redirect" redirect="page-login" href="#" role="button">Back to Login</a>
+			</form>
+    </div>
+    <!-- login page -->
+    <div id="page-login" class="page-block">
+      <h3>Sign in to Slackr</h3>
+			<form>
+			  <div class="row mb-3">
+			    <label for="login-email" class="col-sm-2 col-form-label">Email</label>
+			    <div class="col-sm-10">
+			      <input type="email" class="register-input form-control" id="login-email">
+			    </div>
+			  </div>
+			  <div class="row mb-3">
+			    <label for="login-password" class="col-sm-2 col-form-label">Password</label>
+			    <div class="col-sm-10">
+			      <input type="password" class="register-input form-control" id="login-password">
+			    </div>
+			  </div>
+			  <button type="submit" id="login-submit" class="btn btn-primary">Sign in</button>
+			  <a id="jump-register" class="btn btn-primary redirect" redirect="page-register" href="#" role="button">Jump to Register</a>
+			</form>
+    </div>
+
+    <!-- Dashboard -->
+    <!-- create channel modal -->
+    <div id="modal-channel-create" class="modal">
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">Channel Name</label>
+        <input id="create-channel-name" type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">Description (optional)</label>
+        <input id="create-channel-description" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+      </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Private/Public Channel</label>
+        <select id="private-select-create" class="form-select" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option value="1">Private</option>
+          <option value="2">Public</option>
+        </select>
+      </div>
+      <div class="channel-create-choice">
+        <button id="channel-close-btn" type="button" class="btn btn-primary">Close</button>
+        <button id="channel-submit-btn" type="button" class="btn btn-primary">Create</button>
+      </div>
+    </div>
+    <!-- dashboard -->
+    <div id="page-dashboard" class="dashboard-container page-block">
+      <!-- sidebar -->
+      <div id="sidebar" class="sidebar">
+        <div class="switch-tag">
+          <button id="private-btn" class="btn btn-primary switch-channel">Private</button>
+          <button id="public-btn" class="btn btn-primary switch-channel">Public</button>
+        </div>
+        <div id="channel-list" class="channel-list">
+        </div>
+        <button id="close-nav" class="btn btn-primary"">Close Nav</button>
+        <button id="channel-create-btn" type="button" class="btn btn-primary">Create Channel</button>
+      </div>
+      <!-- message board -->
+      <div class="message-board">
+        <div id="modal-channel-info" class="modal">
+          <p>Channel Name: <input id="info-channel-name" aria-label="channel-name"></p>
+          <p>Channel Description: <input id="info-channel-description" aria-label="channel-description"></p>
+          <p id="info-channel-ifprivate" aria-label="channel-ifprivate"></p>
+          <p id="info-channel-create-time" aria-label="channel-create-time"></p>
+          <p id="info-channel-creator-name" aria-label="channel-creator-name"></p>
+          <button id="channel-info-save-btn" type="button" class="btn btn-primary">Save</button>
+          <button id="channel-info-leave-btn" type="button" class="btn btn-primary">Leave</button>
+          <button id="channel-info-close-btn" type="button" class="btn btn-primary">Close</button>
+        </div>
+        <!-- message header to hold pin & invite buttons -->
+        <div class="message-header">
+          <button id="pin-msg-btn" class="btn btn-outline-info">Pinned Message</button>
+          <button id="invite-usr-btn" class="btn btn-outline-info">Invite</button>
+        </div>
+        <div id="message-screen" class="message-screen">
+        </div>
+        <!-- message box for message input -->
+        <div id="message-box" class="message-box">
+          <div class="message-input">
+            <textarea  id="message-type"  class="form-control"rows="3"></textarea>
+            <textarea  id="image-type"  class="form-control "rows="3"></textarea>
+          </div>
+          <div class="btn-switch">
+            <button id="message-switch-btn" type="button" class="btn btn-outline-primary">Edit Image</button>
+            <button id="message-send-btn" type="button" class="btn btn-outline-primary">Send</button>
+            <button id="message-update-btn" type="button" class="btn btn-outline-primary">Update</button>
+            <button id="message-cancel-btn" type="button" class="btn btn-outline-primary">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; Slackr</p>
+  </footer>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    height: 100vh;
+    width: 100vw;
+    font-family: -apple-system, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header {
+  height: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+main {
+  height: 90%;
+  width: 100%;
+}
+
+.h1{
+  font-size: calc(1.375rem + 0.5vw);
+}
+
+.hide {
+  display: none;
+}
+
+#logout-button {
+  display: none;
+}
+
+#join-btn {
+  display: none;
+}
+
+#close-alert {
+  background-color: transparent;
+}
+
+.message-image {
+ display: none;
+}
+
+.active {
+  display: block;
+}
+
+.carousel-item {
+  display: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:1000;
+}
+
+#profile-modal {
+  display: none;
+}
+
+#profile-image {
+  flex: 0.5;
+}
+
+/* sidebar styles */
+#page-dashboard {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#notification {
+  display: none;
+  background-color: lightcyan;
+}
+
+.switch-tag {
+  flex: 0.5;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: lightblue;
+}
+
+.channel-list {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  background-color: lightcyan;
+}
+
+.message-board {
+  flex: 8;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.modal {
+  display: none;
+  flex-direction: column;
+  background-color: azure;
+  width: 60%;
+  height: min-content;
+  top: 10%;
+  left: 20%;
+}
+
+#pinned-msg-modal {
+  overflow-y:hidden;
+  overflow-x: hidden;
+}
+
+#profile-button {
+  display: none;
+}
+
+.user {
+  display: none;
+}
+
+.modal-content {
+  height: 100%;
+}
+
+.modal-dialog {
+  height: 90%;
+  margin: 10% 20% auto 20%;
+}
+
+.user-profile-modal-dialog {
+  margin: 5% 5%;
+  height: min-content;
+}
+
+#pinned-msg-modal-body {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+  height: 80%;
+}
+
+#modal-channel-info {
+  width: 60%;
+  top: 5%;
+  left: 5%;
+  height: min-content;
+  position: relative;
+}
+
+#modal-channel-create {
+  display: none;
+  flex-direction: column;
+  background-color: azure;
+  width: 60%;
+  height: min-content;
+  top: 10%;
+  left: 20%;
+}
+
+.channel-create-choice {
+  display: flex;
+  flex-direction: row;
+}
+
+.message-header {
+  display: none;
+  flex-direction: row;
+  flex: 1;
+  border-bottom: lightcyan;
+}
+
+.message-screen {
+  display: flex;
+  flex-direction: column-reverse;
+  flex: 7;
+  overflow-y: scroll;
+}
+
+.message-box {
+  display: none;
+  flex-direction: column;
+  flex: 2;
+  border-style: double;
+  border-color: grey;
+}
+
+.message-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.message-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.message-all-btn {
+  display: flex;
+  flex-direction: row;
+}
+
+.message-edit-btn {
+  width: min-content;
+}
+
+.message-delete-btn {
+  width: min-content;
+}
+
+.message {
+  display: flex;
+  flex-direction: row;
+  height: min-content;
+  border-style: dashed;
+  border-width: 1px;
+  border-color:aliceblue;
+  width: 100%;
+}
+
+.message-sender-image {
+  height: 60px;
+  width: 60px;
+}
+
+#pin-msg-btn {
+  height: min-content;
+}
+
+#invite-usr-modal {
+  display: none;
+}
+
+#invite-usr-btn {
+  height: min-content;
+}
+
+.btn-switch {
+  display: flex;
+  flex-direction: row;
+}
+
+.message-input {
+  display: flex;
+  flex: 2;
+}
+
+#message-type {
+  display: flex;
+}
+#image-type {
+  display: none;
+}
+
+.thumbnail {
+  padding: 0.25rem;
+  background-color: var(--bs-body-bg);
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  height: auto;
+  max-width: 40vw;
+}
+
+#message-update-btn {
+  display: none;
+}
+
+.message-btns {
+  display: flex;
+  flex-direction: row;
+}
+
+#message-send-btn {
+  width: min-content;
+  align-self: flex-end;
+}
+
+#message-cancel-btn {
+  display: none;
+}
+
+
+.reaction-btn {
+  display: flex;
+  flex-direction: row;
+  justify-self: flex-end;
+}
+
+.common-btn {
+  display: flex;
+  flex-direction: row;
+}
+
+.message-header {
+  display: none;
+}
+
+.form-check {
+  display: none;
+}
+
+.template {
+  display: none;
+}
+
+#user-profile-modal {
+  display: none;
+}
+
+#user-profile-modal-body {
+  display: flex;
+  flex-direction: row;
+}
+
+#user-profile-image {
+  display: flex;
+  flex: 0.5;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+#user-profile-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.modal-dialog {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  width: max-content;
+  position: relative;
+  margin: 0;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+.image-slide-image {
+  width: 200%;
+  max-width: 100vw;
+  max-height: 70vh;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: relative;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+#main {
+  transition: margin-left .5s; 
+  padding: 20px;
+}
+
+.sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  flex: 2.5;
+  display: none;
+  flex-direction: column;
+}
+
+#sidebar-btn {
+  display: none;
+}
+
+/* The navigation menu links */
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {font-size: 18px;}
+}
